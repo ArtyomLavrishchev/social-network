@@ -1,0 +1,16 @@
+.item {
+    color: white;
+}
+
+.item img {
+    width: 7%;
+    border-radius: 200px;
+    background-color: grey;
+    padding: 3px;
+}
+
+.like{
+    color: darkred;
+    font-weight: bold;
+    padding: 10px;
+}

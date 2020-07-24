@@ -1,0 +1,33 @@
+.item {
+    padding: 10px;
+}
+
+.posts {
+    padding: 15px;
+}
+
+.text {
+    border-radius: 5px;
+    background-color: lightblue;
+    box-shadow: inset 3px 3px 20px darkcyan;
+    border: 1px solid grey;
+    width: 300px;
+    height: 70px;
+    vertical-align: bottom;
+    margin: 0 0 5px 0;
+}
+
+.button {
+    position: relative;
+    left: 21%;
+}
+
+.button button {
+    color: darkcyan;
+    background-color: black;
+    border-radius: 5px;
+    box-shadow: inset 0 0 4px darkcyan;
+    width: 100px;
+    height: 40px;
+    font-size: 110%;
+}

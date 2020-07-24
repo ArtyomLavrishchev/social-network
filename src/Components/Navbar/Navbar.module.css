@@ -1,0 +1,15 @@
+.nav {
+    grid-area: n;
+    background-image: linear-gradient(to bottom, white, black);
+    padding: 20px;
+}
+
+.item a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.item a.activeLink {
+    color: cyan;
+}

@@ -9,17 +9,13 @@ import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
 import {StatePropsType, StoreType} from "./redux/state";
-import {PostsType} from "./Components/Profile/MyPosts/Post/Post";
-import {MessageType} from "./Components/Dialogs/Message/Message";
+import {ActionTypes} from "./redux/state";
 
 
 type PropsType = {
     store: StoreType
     state: StatePropsType
-    addPost: (newPost: string) => void
-    updateNewPostText: (newText: string) => void
-    addMessage: (newMessage: string) => void
-    updateMessageText: (newText: string) => void
+    dispatch: (action: ActionTypes) => void
 }
 
 const App: React.FC<PropsType> = (props) => {
@@ -34,15 +30,13 @@ const App: React.FC<PropsType> = (props) => {
                 <Route path="/profile"
                        render={() => <Profile
                            profilePage={state.profilePage}
-                           addPost={props.store.addPost.bind(props.store)}
-                           updateNewPostText={props.store.updateNewPostText.bind(props.store)}
+                           dispatch={props.store.dispatch.bind(props.store)}
                            newPostText={state.profilePage.newPostText}
                        />}/>
                 <Route path="/dialogs"
                        render={() => <Dialogs
                            messagePage={state.messagesPage}
-                           addMessage={props.store.addMessage.bind(props.store)}
-                           updateNewMessageText={props.store.updateMessageText.bind(props.store)}
+                           dispatch={props.dispatch.bind(props.store)}
                            newMessageText={state.messagesPage.newMessageText}
                        />}/>
                 <Route path="/news" render={() => <News/>}/>

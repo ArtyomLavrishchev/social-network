@@ -10,8 +10,7 @@ export type PostsType = {
 const Post: React.FC<PostsType> = (props) => {
     return (
         <div className={s.item}>
-            <img
-                src="https://yt3.ggpht.com/a/AGF-l7-MVpKP7wI1cV_VsIoRTe_zN7QuGXqugrlDqQ=s900-c-k-c0xffffffff-no-rj-mo"/>
+            <img src="https://yt3.ggpht.com/a/AGF-l7-MVpKP7wI1cV_VsIoRTe_zN7QuGXqugrlDqQ=s900-c-k-c0xffffffff-no-rj-mo" alt="avatar"/>
             {props.message.trim()}
             <div className={s.like}>
                 <span>like</span> {props.likesCount}

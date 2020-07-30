@@ -2,7 +2,12 @@ import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {ActionTypes, MessagesPageType} from "../../redux/state";
+import {
+    ActionTypes,
+    addMessageActionCreator,
+    MessagesPageType,
+    updateNewMessageTextActionCreator
+} from "../../redux/state";
 
 type DialogsPropsType = {
     messagePage: MessagesPageType
@@ -13,14 +18,14 @@ type DialogsPropsType = {
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     let newMessage =
-        props.messagePage.messages.map(m => <Message message={m.message}/>)
+        props.messagePage.messages.map(m => <Message id={m.id} message={m.message}/>)
 
     let addMessage = () => {
-        props.dispatch({type: "ADD-MESSAGE", newMessageText: props.newMessageText})
+        props.dispatch(addMessageActionCreator(props.newMessageText))
     }
     let dialogsElements = props.messagePage.dialogs.map(d => <DialogItem name={d.name} id={d.id} img={d.img}/>)
     let onMessageChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({type: "UPDATE-NEW-MESSAGE-TEXT", newText: event.currentTarget.value});
+        props.dispatch(updateNewMessageTextActionCreator(event.currentTarget.value));
     }
 
     return (

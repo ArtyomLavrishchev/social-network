@@ -4,41 +4,23 @@ import "./App.css";
 import Header from "./Components/Header/Header";
 import NavBar from "./Components/Navbar/Navbar";
 import Profile from "./Components/Profile/Profile";
-import Dialogs from "./Components/Dialogs/Dialogs";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
-import {StatePropsType, StoreType} from "./redux/state";
-import {ActionTypes} from "./redux/state";
+
+import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 
 
-type PropsType = {
-    store: StoreType
-    state: StatePropsType
-    dispatch: (action: ActionTypes) => void
-}
-
-const App: React.FC<PropsType> = (props) => {
-
-    const state = props.store.getState();
-
+const App = () => {
     return (
         <div className="app-wrapper">
             <Header/>
             <NavBar/>
             <div className="app-wrapper-content">
                 <Route path="/profile"
-                       render={() => <Profile
-                           profilePage={state.profilePage}
-                           dispatch={props.store.dispatch.bind(props.store)}
-                           newPostText={state.profilePage.newPostText}
-                       />}/>
+                       render={() => <Profile />}/>
                 <Route path="/dialogs"
-                       render={() => <Dialogs
-                           messagePage={state.dialogsPage}
-                           dispatch={props.dispatch.bind(props.store)}
-                           newMessageText={state.dialogsPage.newMessageText}
-                       />}/>
+                       render={() => <DialogsContainer />}/>
                 <Route path="/news" render={() => <News/>}/>
                 <Route path="/music" render={() => <Music/>}/>
                 <Route path="/settings" render={() => <Settings/>}/>

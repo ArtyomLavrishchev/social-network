@@ -5,7 +5,7 @@ import Post, {PostsType} from "./Post/Post";
 type MyPostsPropsType = {
     posts: Array<PostsType>
     newPostText: string
-    addPost: () => void
+    addPost: (newPostText: string) => void
     updateNewPostText: (text: string) => void
 }
 
@@ -18,7 +18,7 @@ const MyPosts: React.FC<MyPostsPropsType> = (props) => {
             likesCount={p.likesCount}/>)
 
     let addPost = () => {
-        props.addPost();
+        props.addPost(props.newPostText);
     }
 
     let onPostChange = (event: ChangeEvent<HTMLTextAreaElement>) => {

@@ -6,19 +6,19 @@ import {MessagesPageType} from "../../redux/store";
 
 type DialogsPropsType = {
     dialogsPage: MessagesPageType
-    sendMessage: () => void
+    sendMessage: (newMessageText: string) => void
     updateNewMessageBody: (newText: string) => void
 }
-debugger
+
 const Dialogs: React.FC<DialogsPropsType> = (props) => {
-debugger
+
     let state = props.dialogsPage;
 
     let messagesElements =
         state.messages.map(m => <Message key={m.id} id={m.id} message={m.message}/>)
 
     let onSendMessageClick = () => {
-        props.sendMessage()
+        props.sendMessage(props.dialogsPage.newMessageText)
     }
     let dialogsElements = state.dialogs.map(d => <DialogItem
         key={d.id}

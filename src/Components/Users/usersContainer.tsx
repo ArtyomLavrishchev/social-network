@@ -4,12 +4,10 @@ import Users from "./users";
 import {ActionTypes, UserType} from "../../redux/store";
 import {RootStateRedux} from "../../redux/redux-store";
 
-type OwnPropsType = {
-
-}
+type OwnPropsType = {}
 
 type  MapStateToPropsType = {
-    users:  Array<UserType>
+    users: Array<UserType>
 }
 
 let mapStateToProps = (state: RootStateRedux) => {

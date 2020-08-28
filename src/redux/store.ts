@@ -3,7 +3,7 @@ import {DialogsType} from "../Components/Dialogs/DialogItem/DialogItem";
 import {MessageType} from "../Components/Dialogs/Message/Message";
 import {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
 import {addMessageActionCreator, updateNewMessageTextActionCreator} from "./dialogs-reducer";
-import {followAC, setUsersAC, unfollowAC} from "./users-reducer";
+import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC} from "./users-reducer";
 
 export type MessagesPageType = {
     dialogs: Array<DialogsType>
@@ -18,13 +18,9 @@ export type UserType = {
     id: number
     name: string
     status: string
-    photos: {small: string, large: string}
+    photos: { small: string, large: string }
     followed: boolean
     // location: { city: string, country: string }
-}
-
-export type UsersType = {
-    users: Array<UserType>
 }
 
 export type PostActionType =
@@ -38,7 +34,9 @@ export type MessageActionType =
 export type UsersActionType =
     ReturnType<typeof followAC> |
     ReturnType<typeof unfollowAC> |
-    ReturnType<typeof setUsersAC>;
+    ReturnType<typeof setUsersAC> |
+    ReturnType<typeof setCurrentPageAC> |
+    ReturnType<typeof setTotalUsersCountAC>;
 
 
 export type ActionTypes = PostActionType | MessageActionType | UsersActionType;

@@ -3,13 +3,13 @@ import {Route} from "react-router-dom"
 import "./App.css";
 import Header from "./Components/Header/Header";
 import NavBar from "./Components/Navbar/Navbar";
-import Profile from "./Components/Profile/Profile";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
 
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
+import ProfileContainer from "./Components/Profile/ProfileContainer";
 
 
 const App = () => {
@@ -19,7 +19,7 @@ const App = () => {
             <NavBar/>
             <div className="app-wrapper-content">
                 <Route path="/profile"
-                       render={() => <Profile/>}/>
+                       render={() => <ProfileContainer/>}/>
                 <Route path="/users"
                        render={() => <UsersContainer/>}/>
                 <Route path="/dialogs"

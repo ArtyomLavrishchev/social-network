@@ -6,13 +6,15 @@ const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USER_COUNT = 'SET_TOTAL_USER_COUNT'
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 
 let initialState = {
     users: [],
     pageSize: 10,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 };
 const usersReducer = (state: UsersMapStateToPropsType = initialState, action: ActionTypes): UsersMapStateToPropsType => {
     switch (action.type) {
@@ -42,38 +44,48 @@ const usersReducer = (state: UsersMapStateToPropsType = initialState, action: Ac
             return {...state, currentPage: action.currentPage}
         case SET_TOTAL_USER_COUNT:
             return {...state, totalUsersCount: action.count}
+        case TOGGLE_IS_FETCHING:
+            return {...state, isFetching: action.isFetching}
         default:
             return state;
     }
 }
-export const followAC = (userID: number) => {
+export const follow = (userID: number) => {
     return {
         type: FOLLOW,
         userID: userID
     } as const
 }
-export const unfollowAC = (userID: number) => {
+export const unfollow = (userID: number) => {
     return {
         type: UNFOLLOW,
         userID: userID
     } as const
 }
-export const setUsersAC = (users: Array<UserType>) => {
+export const setUsers = (users: Array<UserType>) => {
     return {
         type: SET_USERS,
         users: users
     } as const
 };
-export const setCurrentPageAC = (currentPage: number) => {
+export const setCurrentPage = (currentPage: number) => {
     return {
         type: SET_CURRENT_PAGE,
         currentPage: currentPage
     } as const
 };
-export const setTotalUsersCountAC = (totalUsersCont: number) => {
+export const setTotalUsersCount = (totalUsersCont: number) => {
     return {
         type: SET_TOTAL_USER_COUNT,
         count: totalUsersCont
     } as const
 };
+export const toggleIsFetching = (isFetching: boolean) => {
+    return {
+        type: TOGGLE_IS_FETCHING,
+        isFetching: isFetching
+    } as const
+};
+
+
 export default usersReducer;

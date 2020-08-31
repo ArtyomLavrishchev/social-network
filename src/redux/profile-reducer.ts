@@ -1,7 +1,9 @@
-import {ActionTypes, ProfilePageType} from "./store";
+import {ActionTypes, ProfilePageType, ProfileType} from "./store";
+import {ProfilePropsType} from "../Components/Profile/MyPosts/ProfileInfo/ProfileInfo";
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const SET_USER_PROFILE = "SET_USER_PROFILE";
 
 let initialState = {
     posts: [
@@ -9,7 +11,8 @@ let initialState = {
         {id: 2, message: "It's my first post.", likesCount: 11},
         {id: 3, message: "abracadabra", likesCount: 999},
     ],
-    newPostText: ""
+    newPostText: "",
+    profile: null
 };
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionTypes) => {
@@ -30,6 +33,13 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
                 ...state,
                 newPostText: action.newText
             }
+
+        case SET_USER_PROFILE:
+            return {
+                ...state,
+                profile: action.profile
+            }
+
         default:
             return state;
     }
@@ -45,6 +55,13 @@ export const updateNewPostTextActionCreator = (body: string) => {
     return {
         type: UPDATE_NEW_POST_TEXT,
         newText: body
+    } as const
+}
+
+export const setUserProfile = (profile: ProfileType) => {
+    return {
+        type: SET_USER_PROFILE,
+        profile
     } as const
 }
 

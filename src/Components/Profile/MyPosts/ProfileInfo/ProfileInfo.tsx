@@ -1,17 +1,30 @@
 import React from 'react';
 import s from "./ProfileInfo.module.css";
+import Preloader from "../../../Common/Preloader/Preloader";
+import {ProfileType} from "../../../../redux/store";
 
-const ProfileInfo = () => {
-    return (
-        <div className={s.item}>
-            <div>
-                <img className={s.ava} src="https://pp.userapi.com/c836122/v836122008/21c67/Y7IEYj7QrEo.jpg" alt="avatar"/>
+export type ProfilePropsType = {
+    profile: ProfileType
+}
+
+const ProfileInfo = (props: ProfilePropsType) => {
+    if (!props.profile) {
+        return <Preloader/>
+    } else {
+        return (
+            <div className={s.item}>
+                <div>
+                    <img className={s.ava} src={props.profile.photos.large} alt="avatar"/>
+                </div>
+                <div className={s.description}>
+                    <h2>{props.profile.fullName}</h2>
+                </div>
+                <div>
+                    {props.profile.lookingForAJobDescription}
+                </div>
             </div>
-            <div className={s.description}>
-                Description
-            </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default ProfileInfo;

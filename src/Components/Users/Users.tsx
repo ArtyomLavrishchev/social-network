@@ -2,6 +2,7 @@ import React from "react";
 import s from "./Users.module.css";
 import userPhoto from "../../assets/images/user-profile-icon-png.png"
 import {UserType} from "../../redux/store";
+import {NavLink} from "react-router-dom";
 
 export type UserPropsType = {
     users: Array<UserType>
@@ -31,33 +32,39 @@ const Users = (props: UserPropsType) => {
             })}
         </div>
         {props.users.map((u) =>
-                <div key={u.id}>
+            <div key={u.id}>
                     <span>
                         <div>
+                            <NavLink to={'/profile/' + u.id}>
                             <img src={u.photos.small ? u.photos.small : userPhoto}
                                  className={s.photo}
                                  alt={"avatar"}/>
+                                 </NavLink>
                         </div>
                         <div>
                             {u.followed ?
-                                <button onClick={() => {props.unfollow(u.id)}}>
+                                <button onClick={() => {
+                                    props.unfollow(u.id)
+                                }}>
                                     Unfollow
                                 </button> :
-                                <button onClick={() => {props.follow(u.id)}}>
+                                <button onClick={() => {
+                                    props.follow(u.id)
+                                }}>
                                     Follow
                                 </button>
                             }
                         </div>
                     </span>
-                    <span>
+                <span>
                         <div>{u.name}</div>
                         <div>{u.status}</div>
                     </span>
-                    <span>
+                <span>
                         <div>"u.location.country"</div>
                         <div>"u.location.city"</div>
                     </span>
-                </div>
+            </div>
         )}
     </div>
 }

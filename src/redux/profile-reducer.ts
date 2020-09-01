@@ -1,9 +1,9 @@
 import {ActionTypes, ProfilePageType, ProfileType} from "./store";
-import {ProfilePropsType} from "../Components/Profile/MyPosts/ProfileInfo/ProfileInfo";
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
 let initialState = {
     posts: [
@@ -12,7 +12,8 @@ let initialState = {
         {id: 3, message: "abracadabra", likesCount: 999},
     ],
     newPostText: "",
-    profile: null
+    profile: null,
+    isFetching: false
 };
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionTypes) => {
@@ -39,6 +40,11 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
                 ...state,
                 profile: action.profile
             }
+        case TOGGLE_IS_FETCHING:
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
 
         default:
             return state;
@@ -62,6 +68,12 @@ export const setUserProfile = (profile: ProfileType) => {
     return {
         type: SET_USER_PROFILE,
         profile
+    } as const
+}
+export const toggleIsFetching = (isFetching: boolean) => {
+    return {
+        type: TOGGLE_IS_FETCHING,
+        isFetching
     } as const
 }
 

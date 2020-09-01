@@ -21,6 +21,7 @@ export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText: string
     profile: ProfileType
+    isFetching: boolean
 };
 export type UserType = {
     id: number
@@ -52,7 +53,8 @@ export type ProfileType = {
 export type PostActionType =
     ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof updateNewPostTextActionCreator> |
-    ReturnType<typeof setUserProfile>;
+    ReturnType<typeof setUserProfile> |
+    ReturnType<typeof toggleIsFetching>;
 
 export type MessageActionType =
     ReturnType<typeof addMessageActionCreator> |

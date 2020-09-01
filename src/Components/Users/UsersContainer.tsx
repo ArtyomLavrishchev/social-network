@@ -14,19 +14,23 @@ import axios from "axios";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
 
-export type PropsType = {
+type OwnPropsType = {}
+export type  UsersMapStateToPropsType = {
     users: Array<UserType>
-    follow: (userID: number) => void
-    unfollow: (userID: number) => void
-    setUsers: (users: Array<UserType>) => void
     pageSize: number
     totalUsersCount: number
     currentPage: number
-    setCurrentPage: (currentPage: number) => void
-    setTotalUsersCount: (totalUsersCont: number) => void
     isFetching: boolean
+}
+type MapDispatchToPropsType = {
+    follow: (userID: number) => void
+    unfollow: (userID: number) => void
+    setUsers: (users: Array<UserType>) => void
+    setCurrentPage: (currentPage: number) => void
+    setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
 }
+type PropsType = UsersMapStateToPropsType & MapDispatchToPropsType
 
 class UsersContainer extends React.Component<PropsType> {
     componentDidMount() {
@@ -67,16 +71,6 @@ class UsersContainer extends React.Component<PropsType> {
     }
 }
 
-type OwnPropsType = {}
-
-export type  UsersMapStateToPropsType = {
-    users: Array<UserType>
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-}
-
 let mapStateToProps = (state: RootStateRedux) => {
     return {
         users: state.usersPage.users,
@@ -85,15 +79,6 @@ let mapStateToProps = (state: RootStateRedux) => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching
     }
-}
-
-type MapDispatchToPropsType = {
-    follow: (userID: number) => void
-    unfollow: (userID: number) => void
-    setUsers: (users: Array<UserType>) => void
-    setCurrentPage: (currentPage: number) => void
-    setTotalUsersCount: (totalCount: number) => void
-    toggleIsFetching: (isFetching: boolean) => void
 }
 
 export default connect<UsersMapStateToPropsType, MapDispatchToPropsType, OwnPropsType, RootStateRedux>

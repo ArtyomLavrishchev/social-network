@@ -11,6 +11,7 @@ import {
     toggleIsFetching,
     unfollow
 } from "./users-reducer";
+import {setAuthUserData} from "./auth-reducer";
 
 export type MessagesPageType = {
     dialogs: Array<DialogsType>
@@ -67,6 +68,8 @@ export type UsersActionType =
     ReturnType<typeof setCurrentPage> |
     ReturnType<typeof setTotalUsersCount> |
     ReturnType<typeof toggleIsFetching>;
+export type AuthActionType =
+    ReturnType<typeof setAuthUserData>
 
 
-export type ActionTypes = PostActionType | MessageActionType | UsersActionType;
+export type ActionTypes = PostActionType | MessageActionType | UsersActionType | AuthActionType;

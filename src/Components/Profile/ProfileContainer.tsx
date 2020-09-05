@@ -40,7 +40,7 @@ class ProfileContainer extends React.Component<PropsType> {
 
     render() {
         return <>
-            {this.props.isFetching ? <Preloader /> :
+            {this.props.isFetching ? <Preloader/> :
                 <Profile {...this.props} profile={this.props.profile}/>
             }</>
     };

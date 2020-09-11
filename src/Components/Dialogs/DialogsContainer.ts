@@ -10,6 +10,7 @@ type OwnPropsType = {
 
 type MapStateToPropsType = {
     dialogsPage: MessagesPageType
+    isAuth: boolean
 }
 
 type MapDispatchToPropsType = {
@@ -21,7 +22,8 @@ export type DialogsContainerType = MapStateToPropsType & MapDispatchToPropsType
 
 let mapStateToProps = (state: RootStateRedux) => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 

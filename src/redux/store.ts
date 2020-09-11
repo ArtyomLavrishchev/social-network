@@ -4,15 +4,17 @@ import {MessageType} from "../Components/Dialogs/Message/Message";
 import {addPostActionCreator, setUserProfile, updateNewPostTextActionCreator} from "./profile-reducer";
 import {addMessageActionCreator, updateNewMessageTextActionCreator} from "./dialogs-reducer";
 import {
-    follow,
+    followSuccess,
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
     toggleIsFetching,
     toggleIsFollowingProgress,
-    unfollow
+    unfollowSuccess
 } from "./users-reducer";
 import {setAuthUserData} from "./auth-reducer";
+import {RootStateRedux} from "./redux-store";
+import {Dispatch} from "redux";
 
 export type MessagesPageType = {
     dialogs: Array<DialogsType>
@@ -52,6 +54,11 @@ export type ProfileType = {
     photos: { small: string, large: string }
 } | null
 
+export type GetStateType = () => AppStateType
+export type  DispatchType = Dispatch<ActionTypes>
+
+export type AppStateType = ReturnType<RootStateRedux>
+
 export type PostActionType =
     ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof updateNewPostTextActionCreator> |
@@ -63,8 +70,8 @@ export type MessageActionType =
     ReturnType<typeof updateNewMessageTextActionCreator>;
 
 export type UsersActionType =
-    ReturnType<typeof follow> |
-    ReturnType<typeof unfollow> |
+    ReturnType<typeof followSuccess> |
+    ReturnType<typeof unfollowSuccess> |
     ReturnType<typeof setUsers> |
     ReturnType<typeof setCurrentPage> |
     ReturnType<typeof setTotalUsersCount> |

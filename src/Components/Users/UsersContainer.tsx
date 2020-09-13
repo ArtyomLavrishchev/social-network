@@ -5,6 +5,8 @@ import {RootStateRedux} from "../../redux/redux-store";
 import React from "react";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 type OwnPropsType = {}
 export type  UsersMapStateToPropsType = {
@@ -61,5 +63,7 @@ let mapStateToProps = (state: RootStateRedux): UsersMapStateToPropsType => {
     }
 }
 
-export default connect<UsersMapStateToPropsType, MapDispatchToPropsType, OwnPropsType, RootStateRedux>
-(mapStateToProps, {follow, unfollow, getUsers})(UsersContainer);
+export default compose(
+    connect<UsersMapStateToPropsType, MapDispatchToPropsType, OwnPropsType, RootStateRedux>
+    (mapStateToProps, {follow, unfollow, getUsers})
+)(UsersContainer)

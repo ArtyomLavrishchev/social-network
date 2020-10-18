@@ -1,7 +1,7 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getUserProfile} from "../../redux/profile-reducer";
+import {getStatus, getUserProfile, updateStatus} from "../../redux/profile-reducer";
 import {ProfileType} from "../../redux/store";
 import {RootStateRedux} from "../../redux/redux-store";
 import {withRouter} from 'react-router-dom';
@@ -13,9 +13,12 @@ import {compose} from "redux";
 type MapStateToPropsType = {
     profile: ProfileType
     isFetching: boolean
+    status: string
 }
 type MapDispatchToPropsType = {
     getUserProfile: (UserId: string) => void
+    getStatus: (UserId: string) => void
+    updateStatus: (status: string) => void
 }
 type PathParamsType = {
     userId: string
@@ -28,15 +31,20 @@ class ProfileContainer extends React.Component<PropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId = '2'
+            userId = '10952'
         }
         this.props.getUserProfile(userId)
+        this.props.getStatus(userId)
     }
 
     render() {
         return <>
             {this.props.isFetching ? <Preloader/> :
-                <Profile {...this.props} profile={this.props.profile}/>
+                <Profile {...this.props}
+                         profile={this.props.profile}
+                         status={this.props.status}
+                         updateStatus={this.props.updateStatus}
+                />
             }</>
     }
 }
@@ -45,11 +53,12 @@ let mapStateToProps = (state: RootStateRedux): MapStateToPropsType => {
     return {
         profile: state.profilePage.profile,
         isFetching: state.profilePage.isFetching,
+        status: state.profilePage.status
     }
 }
 export default compose(
     withAuthRedirect,
     withRouter,
     connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, RootStateRedux>
-    (mapStateToProps, {getUserProfile})
+    (mapStateToProps, {getUserProfile, getStatus, updateStatus})
 )(ProfileContainer)

@@ -1,8 +1,12 @@
 import {PostsType} from "../Components/Profile/MyPosts/Post/Post";
 import {DialogsType} from "../Components/Dialogs/DialogItem/DialogItem";
 import {MessageType} from "../Components/Dialogs/Message/Message";
-import {addPostActionCreator, setUserProfile, updateNewPostTextActionCreator} from "./profile-reducer";
-import {addMessageActionCreator, updateNewMessageTextActionCreator} from "./dialogs-reducer";
+import {
+    addPostActionCreator,
+    setProfileStatus,
+    setUserProfile
+} from "./profile-reducer";
+import {addMessageActionCreator} from "./dialogs-reducer";
 import {
     followSuccess,
     setCurrentPage,
@@ -19,13 +23,12 @@ import {Dispatch} from "redux";
 export type MessagesPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
-    newMessageText: string
 };
 export type ProfilePageType = {
     posts: Array<PostsType>
-    newPostText: string
     profile: ProfileType
     isFetching: boolean
+    status: string
 };
 export type UserType = {
     id: number
@@ -61,13 +64,12 @@ export type AppStateType = ReturnType<RootStateRedux>
 
 export type PostActionType =
     ReturnType<typeof addPostActionCreator> |
-    ReturnType<typeof updateNewPostTextActionCreator> |
     ReturnType<typeof setUserProfile> |
-    ReturnType<typeof toggleIsFetching>;
+    ReturnType<typeof toggleIsFetching> |
+    ReturnType<typeof setProfileStatus>;
 
 export type MessageActionType =
-    ReturnType<typeof addMessageActionCreator> |
-    ReturnType<typeof updateNewMessageTextActionCreator>;
+    ReturnType<typeof addMessageActionCreator>
 
 export type UsersActionType =
     ReturnType<typeof followSuccess> |

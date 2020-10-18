@@ -1,10 +1,10 @@
 import {ActionTypes, DispatchType, ProfilePageType, ProfileType} from "./store";
-import {usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 
 const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const SET_STATUS = 'SET_STATUS';
 
 let initialState = {
     posts: [
@@ -12,9 +12,9 @@ let initialState = {
         {id: 2, message: "It's my first post.", likesCount: 11},
         {id: 3, message: "abracadabra", likesCount: 999},
     ],
-    newPostText: "",
     profile: null,
-    isFetching: false
+    isFetching: false,
+    status: ""
 };
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionTypes) => {
@@ -22,18 +22,13 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
         case ADD_POST:
             const newPost = {
                 id: 4,
-                message: action.newPostText,
+                message: action.newPostBody,
                 likesCount: 0
             };
             return {
                 ...state,
                 posts: [...state.posts, newPost],
                 newPostText: ''
-            }
-        case UPDATE_NEW_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.newText
             }
 
         case SET_USER_PROFILE:
@@ -46,22 +41,21 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
                 ...state,
                 isFetching: action.isFetching
             }
+        case SET_STATUS :
+            return {
+                ...state,
+                status: action.status
+            }
 
         default:
             return state;
     }
 }
 
-export const addPostActionCreator = (newPostText: string) => {
+export const addPostActionCreator = (newPostBody: string) => {
     return {
         type: ADD_POST,
-        newPostText: newPostText
-    } as const
-}
-export const updateNewPostTextActionCreator = (body: string) => {
-    return {
-        type: UPDATE_NEW_POST_TEXT,
-        newText: body
+        newPostBody
     } as const
 }
 
@@ -78,6 +72,27 @@ export const toggleIsFetching = (isFetching: boolean) => {
         isFetching
     } as const
 }
+export const setProfileStatus = (status: string) => {
+    return {
+        type: SET_STATUS,
+        status
+    } as const
+}
+export const getStatus = (userId: string) => (dispatch: DispatchType) => {
+    profileAPI.getStatus(userId)
+        .then(response => {
+            dispatch(setProfileStatus(response.data))
+        })
+}
+export const updateStatus = (status: string) => (dispatch: DispatchType) => {
+    profileAPI.updateStatus(status)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setProfileStatus(status))
+            }
+        })
+}
+
 export const getUserProfile = (userId: string) => (dispatch: DispatchType) => {
     dispatch(toggleIsFetching(true))
     usersAPI.getProfile(userId).then(response => {

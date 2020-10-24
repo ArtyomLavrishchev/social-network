@@ -16,9 +16,10 @@ import {
     toggleIsFollowingProgress,
     unfollowSuccess
 } from "./users-reducer";
-import {setAuthUserData} from "./auth-reducer";
+import {getAuthUserData, setAuthUserData} from "./auth-reducer";
 import {RootStateRedux} from "./redux-store";
 import {Dispatch} from "redux";
+import {stopSubmit} from "redux-form";
 
 export type MessagesPageType = {
     dialogs: Array<DialogsType>
@@ -82,6 +83,7 @@ export type UsersActionType =
 
 export type AuthActionType =
     ReturnType<typeof setAuthUserData>
+
 
 
 export type ActionTypes = PostActionType | MessageActionType | UsersActionType | AuthActionType;

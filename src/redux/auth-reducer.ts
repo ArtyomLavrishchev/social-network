@@ -1,6 +1,6 @@
 import {ActionTypes, DispatchType} from "./store";
 import {authAPI} from "../api/api";
-import {FormAction, stopSubmit} from "redux-form";
+import {stopSubmit} from "redux-form";
 
 export type AuthReducerType = {
     id: number | null
@@ -37,7 +37,7 @@ export const setAuthUserData = (id: number | null, email: string | null, login: 
     } as const
 };
 export const getAuthUserData = () => (dispatch: DispatchType) => {
-    authAPI.me()
+    return authAPI.me()
         .then(response => {
             if (response.data.resultCode === 0) {
                 let {id, email, login} = response.data.data

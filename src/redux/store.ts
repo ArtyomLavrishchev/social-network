@@ -1,11 +1,7 @@
 import {PostsType} from "../Components/Profile/MyPosts/Post/Post";
 import {DialogsType} from "../Components/Dialogs/DialogItem/DialogItem";
 import {MessageType} from "../Components/Dialogs/Message/Message";
-import {
-    addPostActionCreator,
-    setProfileStatus,
-    setUserProfile
-} from "./profile-reducer";
+import {addPostActionCreator, setProfileStatus, setUserProfile} from "./profile-reducer";
 import {addMessageActionCreator} from "./dialogs-reducer";
 import {
     followSuccess,
@@ -16,10 +12,8 @@ import {
     toggleIsFollowingProgress,
     unfollowSuccess
 } from "./users-reducer";
-import {getAuthUserData, setAuthUserData} from "./auth-reducer";
-import {RootStateRedux} from "./redux-store";
+import {setAuthUserData} from "./auth-reducer";
 import {Dispatch} from "redux";
-import {stopSubmit} from "redux-form";
 
 export type MessagesPageType = {
     dialogs: Array<DialogsType>
@@ -58,10 +52,8 @@ export type ProfileType = {
     photos: { small: string, large: string }
 } | null
 
-export type GetStateType = () => AppStateType
 export type  DispatchType = Dispatch<ActionTypes>
 
-export type AppStateType = ReturnType<RootStateRedux>
 
 export type PostActionType =
     ReturnType<typeof addPostActionCreator> |

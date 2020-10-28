@@ -31,7 +31,6 @@ type OwnPropsType = {}
 
 class ProfileContainer extends React.Component<PropsType> {
     componentDidMount() {
-        debugger
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = String(this.props.authorisedUserId)

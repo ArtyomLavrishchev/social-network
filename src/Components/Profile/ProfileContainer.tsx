@@ -60,7 +60,7 @@ let mapStateToProps = (state: RootStateRedux): MapStateToPropsType => {
         isAuth: state.auth.isAuth
     }
 }
-export default compose(
+export default compose<React.ComponentType>(
     // withAuthRedirect,
     withRouter,
     connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, RootStateRedux>

@@ -61,7 +61,7 @@ let mapStateToProps = (state: RootStateRedux): MapStateToPropsType => {
     }
 }
 export default compose(
-    withAuthRedirect,
+    // withAuthRedirect,
     withRouter,
     connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, RootStateRedux>
     (mapStateToProps, {getUserProfile, getStatus, updateStatus})

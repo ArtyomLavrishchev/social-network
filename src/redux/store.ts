@@ -1,7 +1,7 @@
 import {PostsType} from "../Components/Profile/MyPosts/Post/Post";
 import {DialogsType} from "../Components/Dialogs/DialogItem/DialogItem";
 import {MessageType} from "../Components/Dialogs/Message/Message";
-import {addPostActionCreator, setProfileStatus, setUserProfile} from "./profile-reducer";
+import {addPostActionCreator, deletePostAC, setProfileStatus, setUserProfile} from "./profile-reducer";
 import {addMessageActionCreator} from "./dialogs-reducer";
 import {
     followSuccess,
@@ -59,7 +59,8 @@ export type PostActionType =
     ReturnType<typeof addPostActionCreator> |
     ReturnType<typeof setUserProfile> |
     ReturnType<typeof toggleIsFetching> |
-    ReturnType<typeof setProfileStatus>;
+    ReturnType<typeof setProfileStatus> |
+    ReturnType<typeof deletePostAC>;
 
 export type MessageActionType =
     ReturnType<typeof addMessageActionCreator>

@@ -10,12 +10,15 @@ type FormDataType = {
     newPostBody: string
 }
 
-const MyPosts: React.FC<MyPostsContainerType> = (props) => {
+const MyPosts = React.memo((props: MyPostsContainerType) => {
     let postsElements =
         props.posts.map(p => <Post
             key={p.id}
+            id={p.id}
             message={p.message}
-            likesCount={p.likesCount}/>)
+            likesCount={p.likesCount}
+            deletePost={props.deletePost}
+        />)
 
     let addPost = (values: FormDataType) => {
         props.addPost(values.newPostBody);
@@ -34,7 +37,8 @@ const MyPosts: React.FC<MyPostsContainerType> = (props) => {
             </div>
         </div>
     )
-}
+});
+
 const maxLength10 = maxLengthCreator(10)
 const AddPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (

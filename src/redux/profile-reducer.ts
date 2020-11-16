@@ -5,6 +5,7 @@ const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const SET_STATUS = 'SET_STATUS';
+const DELETE_POST = 'DELETE_POST'
 
 let initialState = {
     posts: [
@@ -46,6 +47,8 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
                 ...state,
                 status: action.status
             }
+        case DELETE_POST:
+            return {...state, posts: state.posts.filter(p => p.id !== action.postId)}
 
         default:
             return state;
@@ -56,6 +59,12 @@ export const addPostActionCreator = (newPostBody: string) => {
     return {
         type: ADD_POST,
         newPostBody
+    } as const
+}
+export const deletePostAC = (postId: number) => {
+    return {
+        type: DELETE_POST,
+        postId
     } as const
 }
 

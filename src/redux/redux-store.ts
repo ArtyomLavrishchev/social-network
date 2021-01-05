@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import {compose, applyMiddleware, combineReducers, createStore} from "redux";
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import usersReducer from "./users-reducer";
@@ -15,12 +15,13 @@ let reducers = combineReducers({
     app: appReducer,
     form: formReducer
 });
+//@ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
 type PropertiesTypes<T> = T extends { [key: string]: infer U } ? U : never
 export type InferActionsTypes<T extends { [key: string]: (...args: any[]) => any }> = ReturnType<PropertiesTypes<T>>
 
 export type RootStateRedux = ReturnType<typeof reducers> & ReturnType<typeof applyMiddleware>
-
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 export default store;

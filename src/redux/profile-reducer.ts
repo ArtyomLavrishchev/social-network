@@ -1,11 +1,11 @@
 import {ActionTypes, DispatchType, ProfilePageType, ProfileType} from "./store";
 import {profileAPI, usersAPI} from "../api/api";
 
-const ADD_POST = "ADD-POST";
-const SET_USER_PROFILE = "SET_USER_PROFILE";
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
-const SET_STATUS = 'SET_STATUS';
-const DELETE_POST = 'DELETE_POST'
+const ADD_POST = "social-network/profile/ADD-POST";
+const SET_USER_PROFILE = "social-network/profile/SET_USER_PROFILE";
+const TOGGLE_IS_FETCHING = 'social-network/TOGGLE_IS_FETCHING';
+const SET_STATUS = 'social-network/profile/SET_STATUS';
+const DELETE_POST = 'social-network/profile/DELETE_POST'
 
 let initialState = {
     posts: [
@@ -87,27 +87,22 @@ export const setProfileStatus = (status: string) => {
         status
     } as const
 }
-export const getStatus = (userId: string) => (dispatch: DispatchType) => {
-    profileAPI.getStatus(userId)
-        .then(response => {
-            dispatch(setProfileStatus(response.data))
-        })
+export const getStatus = (userId: string) => async (dispatch: DispatchType) => {
+    const response = await profileAPI.getStatus(userId)
+    dispatch(setProfileStatus(response.data))
 }
-export const updateStatus = (status: string) => (dispatch: DispatchType) => {
-    profileAPI.updateStatus(status)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setProfileStatus(status))
-            }
-        })
+export const updateStatus = (status: string) => async (dispatch: DispatchType) => {
+    const response = await profileAPI.updateStatus(status)
+    if (response.data.resultCode === 0) {
+        dispatch(setProfileStatus(status))
+    }
 }
 
-export const getUserProfile = (userId: string) => (dispatch: DispatchType) => {
+export const getUserProfile = (userId: string) => async (dispatch: DispatchType) => {
     dispatch(toggleIsFetching(true))
-    usersAPI.getProfile(userId).then(response => {
-        dispatch(toggleIsFetching(false))
-        dispatch(setUserProfile(response.data))
-    })
+    const response = await usersAPI.getProfile(userId)
+    dispatch(toggleIsFetching(false))
+    dispatch(setUserProfile(response.data))
 }
 
 export default profileReducer;

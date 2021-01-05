@@ -1,6 +1,6 @@
 import {ActionTypes, MessagesPageType} from "./store";
 
-const SEND_MESSAGE = "ADD-MESSAGE";
+const SEND_MESSAGE = "social-network/dialogs/ADD-MESSAGE";
 
 let initialState = {
     dialogs: [

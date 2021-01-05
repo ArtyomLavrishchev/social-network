@@ -4,26 +4,3 @@
     border-radius: 100px;
 }
 
-.pages {
-    cursor: pointer;
-    margin: 1px;
-}
-
-.selectedPage {
-    font-weight: bold;
-    cursor: pointer;
-    margin: 1px;
-}
-
-.pages:hover {
-    font-size: 110%;
-    color: cornsilk;
-    transition: 0.3s;
-    margin: 3px;
-}
-
-.item1 {
-    height: 25px;
-    display: flex;
-    align-items: flex-end;
-}

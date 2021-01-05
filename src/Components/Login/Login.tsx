@@ -1,6 +1,6 @@
 import React from "react";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Input} from "../Common/FormsControls/FormsControls";
+import {InjectedFormProps, reduxForm} from "redux-form";
+import {createField, Input} from "../Common/FormsControls/FormsControls";
 import {maxLengthCreator, required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
@@ -14,21 +14,18 @@ type FormDataType = {
     rememberMe: boolean
 }
 const maxLength40 = maxLengthCreator(40)
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (
+    {
+        handleSubmit,
+        error
+    }) => {
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field validate={[required, maxLength40]} component={Input} name={"email"} placeholder={"Email"}/>
-            </div>
-            <div>
-                <Field validate={[required, maxLength40]} component={Input} name={"password"} type={"password"}
-                       placeholder={"Password"}/>
-            </div>
-            <div>
-                <Field component={Input} name={"rememberMe"} type={"checkbox"}/> remember me
-            </div>
-            {props.error && <div className={s.formSummaryError}>
-                {props.error}
+        <form onSubmit={handleSubmit}>
+            {createField("Email", "email", [required, maxLength40], Input, null, null)}
+            {createField("Password", "password", [required, maxLength40], Input, null, {type: "password"})}
+            {createField(null, "rememberMe", null, Input, "remember me", {type: "checkbox"})}
+            {error && <div className={s.formSummaryError}>
+                {error}
             </div>}
             <div>
                 <button>Login</button>

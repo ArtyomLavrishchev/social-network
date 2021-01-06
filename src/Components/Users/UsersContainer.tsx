@@ -13,6 +13,7 @@ import {
     getTotalUsersCount,
     getUsers
 } from "../../redux/users-selectors";
+import {Paginator} from "../Common/Paginator/Paginator";
 
 type OwnPropsType = {}
 export type  UsersMapStateToPropsType = {
@@ -43,13 +44,15 @@ class UsersContainer extends React.Component<PropsType> {
 
     render() {
         return <>
+            <Paginator pageSize={this.props.pageSize}
+                       totalItemsCount={this.props.totalUsersCount}
+                       currentPage={this.props.currentPage}
+                       onPageChanged={this.onPageChanged}
+                       portionSize={10}
+                       isFetching={this.props.isFetching}/>
             {this.props.isFetching ?
                 <Preloader/> :
                 <Users
-                    totalUsersCount={this.props.totalUsersCount}
-                    pageSize={this.props.pageSize}
-                    currentPage={this.props.currentPage}
-                    onPageChanged={this.onPageChanged}
                     users={this.props.users}
                     follow={this.props.follow}
                     unfollow={this.props.unfollow}

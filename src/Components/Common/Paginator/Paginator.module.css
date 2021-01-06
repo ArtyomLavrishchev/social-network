@@ -2,7 +2,13 @@
     height: 35px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+}
+
+.paginator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .pages {
@@ -16,8 +22,12 @@
 }
 
 .pages:hover {
-    font-size: 110%;
     color: cornsilk;
     transition: 0.3s;
-    margin: 4px;
+    text-shadow: 0 0 3px cyan;
+}
+
+.isFetching {
+    pointer-events: none;
+    opacity: 0.7;
 }

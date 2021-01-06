@@ -19,40 +19,37 @@ export const User: React.FC<UserPropsType> = (
         follow
     }) => {
     return (
-        <div>
-            <span>
-                <div>
-                    <NavLink to={'/profile/' + user.id}>
-                        <img src={user.photos.small ? user.photos.small : userPhoto}
-                             className={s.photo}
-                             alt={"avatar"}/>
-                    </NavLink>
-                </div>
-                <div>
-                    {user.followed ?
-                        <button disabled={followingInProgress.some(id => id === user.id)}
-                                onClick={() => {
-                                    unfollow(user.id)
-                                }}>
-                            Unfollow
-                        </button> :
-                        <button disabled={followingInProgress.some(id => id === user.id)}
-                                onClick={() => {
-                                    follow(user.id)
-                                }}>
-                            Follow
-                        </button>
-                    }
-                </div>
-            </span>
-            <span>
+        <div className={s.wrapper}>
+            <div className={s.item}>
+                <NavLink to={'/profile/' + user.id}>
+                    <img src={user.photos.small ? user.photos.small : userPhoto}
+                         className={s.photo}
+                         alt={"avatar"}/>
+                </NavLink>
+
+                {user.followed ?
+                    <button className={s.followed}
+                            disabled={followingInProgress.some(id => id === user.id)}
+                            onClick={() => {
+                                unfollow(user.id)
+                            }}>
+                        &#10007;
+                    </button> :
+                    <button className={s.unfollowed}
+                            disabled={followingInProgress.some(id => id === user.id)}
+                            onClick={() => {
+                                follow(user.id)
+                            }}>
+                        &#10003;
+                    </button>
+                }
+            </div>
+            <div>
                 <div>{user.name}</div>
                 <div>{user.status}</div>
-            </span>
-            <span>
                 <div>"user.location.country"</div>
                 <div>"user.location.city"</div>
-            </span>
+            </div>
         </div>
     )
 }

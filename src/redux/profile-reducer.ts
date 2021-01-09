@@ -1,5 +1,9 @@
-import {ActionTypes, DispatchType, ProfilePageType, ProfilePhotoType, ProfileType} from "./store";
+import {ActionTypes, DispatchType, ProfilePageType, ProfilePhotoType, ProfileType, ThunkType} from "./store";
 import {profileAPI, usersAPI} from "../api/api";
+import {RootStateRedux} from "./redux-store";
+import {ThunkAction} from "redux-thunk";
+import {Dispatch} from "react";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = "social-network/profile/ADD-POST";
 const SET_USER_PROFILE = "social-network/profile/SET_USER_PROFILE";
@@ -100,28 +104,39 @@ export const savePhotoSuccess = (photos: ProfilePhotoType) => {
         photos
     } as const
 }
-export const getStatus = (userId: string) => async (dispatch: DispatchType) => {
+export const getStatus = (userId: string): ThunkType => async (dispatch) => {
     const response = await profileAPI.getStatus(userId)
     dispatch(setProfileStatus(response.data))
 }
-export const updateStatus = (status: string) => async (dispatch: DispatchType) => {
+export const updateStatus = (status: string): ThunkType => async (dispatch) => {
     const response = await profileAPI.updateStatus(status)
     if (response.data.resultCode === 0) {
         dispatch(setProfileStatus(status))
     }
 }
-export const savePhoto = (file: File) => async (dispatch: DispatchType) => {
+export const savePhoto = (file: File): ThunkType => async (dispatch) => {
     const response = await profileAPI.savePhoto(file)
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos))
     }
 }
-
+export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch: any, getState) => {
+    const userId = getState().auth.id
+    const response = await profileAPI.saveProfile(profile)
+    if (response.data.resultCode === 0) {
+        if (userId) {
+            dispatch(getUserProfile(userId.toString()))
+        }
+    } else {
+        const errorTitle = response.data.messages[0].split('->')[1].slice(0, -1).toLowerCase()
+        dispatch(stopSubmit('edit-profile', {'contacts': {[errorTitle]: response.data.messages[0]} }));
+        return Promise.reject(response.data.messages[0])
+    }
+}
 export const getUserProfile = (userId: string) => async (dispatch: DispatchType) => {
     dispatch(toggleIsFetching(true))
     const response = await usersAPI.getProfile(userId)
     dispatch(toggleIsFetching(false))
     dispatch(setUserProfile(response.data))
 }
-
 export default profileReducer;

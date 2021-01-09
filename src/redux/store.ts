@@ -18,8 +18,10 @@ import {
     toggleIsFollowingProgress,
     unfollowSuccess
 } from "./users-reducer";
-import {setAuthUserData} from "./auth-reducer";
+import {getCaptchaUrlSuccess, setAuthUserData} from "./auth-reducer";
 import {Dispatch} from "redux";
+import {ThunkAction} from "redux-thunk";
+import {RootStateRedux} from "./redux-store";
 
 export type MessagesPageType = {
     dialogs: Array<DialogsType>
@@ -56,6 +58,7 @@ export type ProfileType = {
         mainLink: string
     }
     photos: ProfilePhotoType
+    aboutMe: string
 } | null
 export type ProfilePhotoType = {
     small: string,
@@ -85,7 +88,8 @@ export type UsersActionType =
     ReturnType<typeof toggleIsFollowingProgress>;
 
 export type AuthActionType =
-    ReturnType<typeof setAuthUserData>
+    ReturnType<typeof setAuthUserData> |
+    ReturnType<typeof getCaptchaUrlSuccess>
 
 
 export type ActionTypes =
@@ -94,3 +98,5 @@ export type ActionTypes =
     | UsersActionType
     | AuthActionType
     | ReturnType<typeof savePhotoSuccess>;
+
+export type ThunkType = ThunkAction<void, RootStateRedux, Dispatch<ActionTypes>, ActionTypes>

@@ -17,7 +17,7 @@ let initialState = {
         {
             id: 3,
             name: "Валерия",
-            img: "https://pubg.best/data/avatars/l/0/721.jpg?1531143739"
+            img: "https://sun1-19.userapi.com/impg/c855032/v855032039/2231b7/6euQqUV0YMQ.jpg?size=200x0&quality=88&crop=6,5,1288,1288&sign=83bf255e018a05d0f8b73055341a71f7&c_uniq_tag=AHl_dkk5RHNoYgPMQ8zNoJj8ZqBCmaFOlda9WWmeP_k&ava=1"
         },
         {
             id: 4,

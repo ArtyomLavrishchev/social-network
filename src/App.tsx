@@ -7,15 +7,16 @@ import Music from "./Components/Music/Music";
 import {Settings} from "./Components/Settings/Settings";
 
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
-import UsersContainer from "./Components/Users/UsersContainer";
-import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
-import Login from "./Components/Login/Login";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
 import {RootStateRedux} from "./redux/redux-store";
 import Preloader from "./Components/Common/Preloader/Preloader";
+
+const UsersContainer = React.lazy(() => import('./Components/Users/UsersContainer'));
+const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'));
+const Login = React.lazy(() => import('./Components/Login/Login'));
 
 type OwnPropsType = {}
 type MapStateToPropsType = {
@@ -41,16 +42,18 @@ class App extends React.Component<AppPropsType> {
                 <HeaderContainer/>
                 <NavBar/>
                 <div className="app-wrapper-content">
-                    <Route path="/profile/:userId?"
-                           render={() => <ProfileContainer/>}/>
-                    <Route path="/users"
-                           render={() => <UsersContainer/>}/>
+                    <React.Suspense fallback={<Preloader/>}>
+                        <Route path="/profile/:userId?"
+                               render={() => <ProfileContainer/>}/>
+                        <Route path="/users"
+                               render={() => <UsersContainer/>}/>
+                        <Route path="/login" render={() => <Login/>}/>
+                    </React.Suspense>
                     <Route path="/dialogs"
                            render={() => <DialogsContainer/>}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Settings/>}/>
-                    <Route path="/login" render={() => <Login/>}/>
                 </div>
             </div>
 

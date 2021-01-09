@@ -21,14 +21,16 @@ export const ProfileStatusWithHooks: React.FC<ProfileStatusType> = (props) => {
     }
     return (
         <div>
+            {!editMode &&
             <div>
-                {!editMode &&
-                <span onDoubleClick={activateEditMode}>{props.status || "Your status:"}</span>}
+                <b>Status: </b><span onDoubleClick={activateEditMode}>{props.status || "Your status:"}</span>
             </div>
+            }
+            {editMode &&
             <div>
-                {editMode &&
-                <input onChange={onStatusChange} autoFocus onBlur={deActivateEditMode} value={status}/>}
+                <input onChange={onStatusChange} autoFocus onBlur={deActivateEditMode} value={status}/>
             </div>
+            }
         </div>
     )
 }

@@ -1,7 +1,13 @@
 import {PostsType} from "../Components/Profile/MyPosts/Post/Post";
 import {DialogsType} from "../Components/Dialogs/DialogItem/DialogItem";
 import {MessageType} from "../Components/Dialogs/Message/Message";
-import {addPostActionCreator, deletePostAC, setProfileStatus, setUserProfile} from "./profile-reducer";
+import {
+    addPostActionCreator,
+    deletePostAC,
+    savePhotoSuccess,
+    setProfileStatus,
+    setUserProfile
+} from "./profile-reducer";
 import {addMessageActionCreator} from "./dialogs-reducer";
 import {
     followSuccess,
@@ -24,6 +30,7 @@ export type ProfilePageType = {
     profile: ProfileType
     isFetching: boolean
     status: string
+    newPostText: string
 };
 export type UserType = {
     id: number
@@ -39,7 +46,7 @@ export type ProfileType = {
     lookingForAJobDescription: string
     fullName: string
     contacts: {
-        github: string
+        [github: string]: string
         vk: string
         facebook: string
         instagram: string
@@ -48,8 +55,12 @@ export type ProfileType = {
         youtube: string
         mainLink: string
     }
-    photos: { small: string, large: string }
+    photos: ProfilePhotoType
 } | null
+export type ProfilePhotoType = {
+    small: string,
+    large: string
+}
 
 export type  DispatchType = Dispatch<ActionTypes>
 
@@ -77,5 +88,9 @@ export type AuthActionType =
     ReturnType<typeof setAuthUserData>
 
 
-
-export type ActionTypes = PostActionType | MessageActionType | UsersActionType | AuthActionType;
+export type ActionTypes =
+    PostActionType
+    | MessageActionType
+    | UsersActionType
+    | AuthActionType
+    | ReturnType<typeof savePhotoSuccess>;

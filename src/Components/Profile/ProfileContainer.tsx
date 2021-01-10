@@ -10,27 +10,6 @@ import Preloader from "../Common/Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
 
-type MapStateToPropsType = {
-    profile: ProfileType
-    isFetching: boolean
-    status: string
-    authorisedUserId: number | null
-    isAuth: boolean
-}
-type MapDispatchToPropsType = {
-    getUserProfile: (UserId: string) => void
-    getStatus: (UserId: string) => void
-    updateStatus: (status: string) => void
-    savePhoto: (file: File) => void
-    saveProfile: any
-}
-type PathParamsType = {
-    userId: string
-}
-type PropsType = RouteComponentProps<PathParamsType> & ProfileContainerPropsType
-type ProfileContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
-type OwnPropsType = {}
-
 class ProfileContainer extends React.Component<PropsType> {
     refreshProfile() {
         let userId = this.props.match.params.userId
@@ -82,3 +61,25 @@ export default compose<React.ComponentType>(
     connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, RootStateRedux>
     (mapStateToProps, {getUserProfile, getStatus, updateStatus, savePhoto, saveProfile})
 )(ProfileContainer)
+
+
+type MapStateToPropsType = {
+    profile: ProfileType
+    isFetching: boolean
+    status: string
+    authorisedUserId: number | null
+    isAuth: boolean
+}
+type MapDispatchToPropsType = {
+    getUserProfile: (UserId: string) => void
+    getStatus: (UserId: string) => void
+    updateStatus: (status: string) => void
+    savePhoto: (file: File) => void
+    saveProfile: any
+}
+type PathParamsType = {
+    userId: string
+}
+type PropsType = RouteComponentProps<PathParamsType> & ProfileContainerPropsType
+type ProfileContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
+type OwnPropsType = {}

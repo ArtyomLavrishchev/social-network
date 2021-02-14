@@ -2,18 +2,10 @@ import {ActionTypes, DispatchType, ThunkType} from "./store";
 import {authAPI, securityAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
-export type AuthReducerType = {
-    id: number | null
-    email: string | null
-    login: string | null
-    isAuth: boolean
-    captchaUrl: string | null
-}
-
 const SET_USER_DATA = 'social-network/auth/SET_USER_DATA'
 const GET_CAPTCHA_URL_SUCCESS = 'social-network/auth/GET_CAPTCHA_URL_SUCCESS'
 
-let initialState = {
+let initialState: AuthReducerType = {
     id: null,
     email: null,
     login: null,
@@ -35,7 +27,7 @@ const authReducer = (state: AuthReducerType = initialState, action: ActionTypes)
     }
 }
 
-export const setAuthUserData = (id: number | null, email: string | null, login: string | null, isAuth: boolean) => {
+export const setAuthUserData = (id: number|null, email: string | null, login: string | null, isAuth: boolean): SetAuthUserDataActionType => {
     return {
         type: SET_USER_DATA,
         payload: {id, email, login, isAuth}
@@ -83,3 +75,23 @@ export const getCaptchaUrl = () => async (dispatch: DispatchType) => {
 };
 
 export default authReducer;
+
+export type AuthReducerType = {
+    id: number | null
+    email: string | null
+    login: string | null
+    isAuth: boolean
+    captchaUrl: string | null
+}
+
+type SetAuthUserDataPayloadType = {
+    id: number | null
+    email: string | null
+    login: string | null
+    isAuth: boolean
+}
+
+type SetAuthUserDataActionType = {
+    type: typeof SET_USER_DATA
+    payload: SetAuthUserDataPayloadType
+}

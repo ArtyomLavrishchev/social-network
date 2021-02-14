@@ -27,8 +27,9 @@ export const Textarea = (props: any) => {
 }
 
 export const Input = (props: any) => {
-    const {input, meta, child, element, ...restProps} = props
-    return <FormControl {...props}><input {...input} {...restProps}/></FormControl>
+    const {input, meta, child, element, title, ...restProps} = props
+    console.log(title)
+    return <FormControl {...props}><input {...input} {...restProps} value={title}/></FormControl>
 }
 
 export const createField = (
@@ -41,7 +42,7 @@ export const createField = (
 ) => {
     return (
         <div className={s.field}>
-            <Field validate={validate} component={component} name={name} placeholder={placeholder} {...restProps}/>
+            <Field validate={validate} component={component} name={name} placeholder={placeholder} {...restProps} />
         </div>
     )
 }

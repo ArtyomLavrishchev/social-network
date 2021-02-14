@@ -14,6 +14,7 @@ import {
     getUsers
 } from "../../redux/users-selectors";
 import {Paginator} from "../Common/Paginator/Paginator";
+import UsersSearchForm from "./UsersSearchForm";
 
 type OwnPropsType = {}
 export type  UsersMapStateToPropsType = {
@@ -27,19 +28,19 @@ export type  UsersMapStateToPropsType = {
 type MapDispatchToPropsType = {
     follow: (UserId: number) => void
     unfollow: (UserId: number) => void
-    requestUsers: (currentPage: number, pageSize: number) => void
+    requestUsers: (currentPage: number, pageSize: number, term: string) => void
 }
 type PropsType = UsersMapStateToPropsType & MapDispatchToPropsType & OwnPropsType
 
 class UsersContainer extends React.Component<PropsType> {
     componentDidMount() {
         const {currentPage, pageSize} = this.props
-        this.props.requestUsers(currentPage, pageSize);
+        this.props.requestUsers(currentPage, pageSize, '');
     }
 
     onPageChanged = (pageNumber: number) => {
         const {pageSize} = this.props
-        this.props.requestUsers(pageNumber, pageSize);
+        this.props.requestUsers(pageNumber, pageSize, '');
     }
 
     render() {
@@ -50,6 +51,7 @@ class UsersContainer extends React.Component<PropsType> {
                        onPageChanged={this.onPageChanged}
                        portionSize={10}
                        isFetching={this.props.isFetching}/>
+                       <UsersSearchForm/>
             {this.props.isFetching ?
                 <Preloader/> :
                 <Users

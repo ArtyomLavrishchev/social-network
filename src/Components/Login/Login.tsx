@@ -27,9 +27,9 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType, LoginFormOwnProps> & L
     }) => {
     return (
         <form onSubmit={handleSubmit}>
-            {createField("Email", "email", [required, maxLength40], Input, null, null)}
-            {createField("Password", "password", [required, maxLength40], Input, null, {type: "password"})}
-            {createField(null, "rememberMe", null, Input, "remember me", {type: "checkbox"})}
+            {createField("Email", "email", [required, maxLength40], Input, null, {title: "temalggt540@gmail.com"})}
+            {createField("Password", "password", [required, maxLength40], Input, null, {type: "password", title: 'Valeria0404'})}
+            {createField(null, "rememberMe", null, Input, "remember me", {type: "checkbox", checked: true})}
             {captchaURL && <div>
                 <img src={captchaURL} alt={'captcha'}/>
                 {createField('Symbols from image', "captcha", [required], Input, null, null)}

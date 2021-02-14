@@ -96,7 +96,7 @@ export const toggleIsFollowingProgress = (isFetching: boolean, userId: number) =
     } as const
 };
 
-export const requestUsers = (page: number, pageSize: number) =>
+export const requestUsers = (page: number, pageSize: number, term: string) =>
     async (dispatch: DispatchType) => {
         dispatch(toggleIsFetching(true))
         let data = await usersAPI.getUsers(page, pageSize)

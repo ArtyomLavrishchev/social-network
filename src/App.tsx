@@ -35,6 +35,8 @@ class App extends React.Component<AppPropsType> {
                         <Switch>
                             <Route exact path="/"
                                    render={() => <Redirect to={"/profile"}/>}/>
+                            <Route exact path="/social-network"
+                                   render={() => <Redirect to={"/profile"}/>}/>
                             <Route path="/profile/:userId?"
                                    render={() => <ProfileContainer/>}/>
                             <Route path="/users"

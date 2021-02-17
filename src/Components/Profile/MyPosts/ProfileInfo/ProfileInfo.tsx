@@ -42,7 +42,7 @@ const ProfileInfo: React.FC<ProfilePropsType> = (
         <div className={s.item}>
             <div>
                 <img className={s.ava} src={profile.photos.large ? profile.photos.large : userPhoto} alt="avatar"/>
-                {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
+                <div>{isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}</div>
             </div>
             <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
             {editMode ? <ProfileDataFormRedux profile={profile} initialValues={profile} onSubmit={onSubmit}/> :

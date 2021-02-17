@@ -4,6 +4,7 @@ import Post from "./Post/Post";
 import {MyPostsContainerType} from "./MyPostsContainer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Textarea} from "../../Common/FormsControls/FormsControls";
+import {Button} from "antd";
 
 type FormDataType = {
     newPostBody: string
@@ -26,7 +27,7 @@ const MyPosts = React.memo((props: MyPostsContainerType) => {
     return (
         <div className={s.item}>
             <div>
-                <h3>My posts</h3>
+                <h3 className={s.title}>My posts</h3>
             </div>
             <div>
                 <AddPostFormRedux onSubmit={addPost}/>
@@ -41,16 +42,14 @@ const MyPosts = React.memo((props: MyPostsContainerType) => {
 const AddPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <div>
+            <div className={s.form}>
                 <Field
                     component={Textarea}
                     className={s.text}
                     name={"newPostBody"}
                     placeholder={"What's new?"}
                 />
-            </div>
-            <div className={s.button}>
-                <button>Add post</button>
+                <Button>Add post</Button>
             </div>
         </form>
     )

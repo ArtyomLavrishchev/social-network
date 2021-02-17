@@ -1,21 +1,4 @@
-.app-wrapper {
-    display: grid;
-    margin: 0 auto;
-    width: 85vw;
-    grid-template-areas:
-    "h h"
-    "n c";
 
-    grid-template-rows: 60px 1fr;
-    grid-auto-columns: 2fr 10fr;
-
-}
-
-.app-wrapper-content {
-    grid-area: c;
-    background-color: darkcyan;
-    min-height: 100vh;
-}
 #components-layout-demo-side .logo {
     height: 32px;
     margin: 16px;
@@ -23,5 +6,9 @@
 }
 
 .site-layout .site-layout-background {
-    background: #fff;
+    background: linear-gradient(to right, #001529, #004c98, #001529);
+}
+.content {
+    color: #111;
+    font-family: 'Poppins', sans-serif;
 }

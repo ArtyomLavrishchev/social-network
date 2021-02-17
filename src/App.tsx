@@ -6,16 +6,17 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
 import {RootStateRedux} from "./redux/redux-store";
+import {AppHeader} from "./Components/Header/Header";
 import "./App.css";
 import 'antd/dist/antd.css';
 
-import {Layout, Menu, Breadcrumb, Avatar} from 'antd';
+import {Layout, Menu} from 'antd';
 import {
     TeamOutlined,
     UserOutlined,
 } from '@ant-design/icons';
 
-const {Header, Content, Footer, Sider} = Layout;
+const {Content, Sider} = Layout;
 const {SubMenu} = Menu;
 
 const UsersContainer = React.lazy(() => import('./Components/Users/UsersContainer'));
@@ -24,7 +25,7 @@ const Login = React.lazy(() => import('./Components/Login/Login'));
 
 class App extends React.Component<AppPropsType> {
     state = {
-        collapsed: false,
+        collapsed: true,
     };
     onCollapse = (collapsed: boolean) => {
         console.log(collapsed);
@@ -59,14 +60,8 @@ class App extends React.Component<AppPropsType> {
                     </Menu>
                 </Sider>
                 <Layout className="site-layout">
-                    <Header className="site-layout-background" style={{padding: 0}}>
-
-                    </Header>
-                    <Content style={{margin: '0 16px'}}>
-                        <Breadcrumb style={{margin: '16px 0'}}>
-                            <Breadcrumb.Item>User</Breadcrumb.Item>
-                            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-                        </Breadcrumb>
+                    <AppHeader/>
+                    <Content className={"content"} style={{backgroundColor: "#c4dfff"}}>
                         <React.Suspense fallback={<Preloader/>}>
                             <Switch>
                                 <Route exact path="/"
@@ -84,16 +79,8 @@ class App extends React.Component<AppPropsType> {
                             </Switch>
                         </React.Suspense>
                     </Content>
-                    <Footer style={{textAlign: 'center'}}>Ant Design ©2018 Created by Ant UED</Footer>
                 </Layout>
             </Layout>
-
-            /*<div className="app-wrapper">
-                <HeaderContainer/>
-                <NavBar/>
-
-            </div>*/
-
         );
     }
 }

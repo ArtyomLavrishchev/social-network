@@ -1,26 +1,31 @@
 import React from 'react';
-import s from "./Header.module.css";
-import {NavLink} from "react-router-dom";
-import {AuthMapStateToPropsType} from "./HeaderContainer";
+import {Link} from "react-router-dom";
+import {Button, Col, Layout, Row} from "antd";
+import {useDispatch, useSelector} from "react-redux";
+import {selectIsAuth} from "../../redux/auth-selectors";
+import {logout} from "../../redux/auth-reducer";
 
-type HeaderType = AuthMapStateToPropsType & {
-    logout: () => void
-}
+const {Header} = Layout;
 
-const Header = (props: HeaderType) => {
+export const AppHeader = () => {
+    const isAuth = useSelector(selectIsAuth);
+    const dispatch = useDispatch();
+    const logoutCallback = () => {
+        dispatch(logout())
+    }
     return (
-        <header className={s.header}>
-            <img
-                src="https://upload.wikimedia.org/wikipedia/ru/thumb/3/37/Jumpman_logo.svg/1200px-Jumpman_logo.svg.png"
-                alt={'avatar'}/>
-            <div className={s.loginBlock}>
-                {props.isAuth
-                    ? <div>{props.login}  <button onClick={props.logout}>Logout</button></div>
-                    : <NavLink to={'/login'}>Login</NavLink>
-                }
-            </div>
-        </header>
+        <Header className="site-layout-background" style={{padding: 0}}>
+            <Row>
+                <Col span={22}/>
+                <Col span={2}>
+                    {isAuth ? <Button type={'ghost'} ghost size={'middle'} onClick={logoutCallback}>Logout</Button> :
+                        <Button type={'ghost'} ghost size={'middle'} onClick={logoutCallback}>
+                            <Link to={'/login'}>Login</Link>
+                        </Button>}
+                </Col>
+            </Row>
+        </Header>
     );
-}
+};
 
-export default Header;
+

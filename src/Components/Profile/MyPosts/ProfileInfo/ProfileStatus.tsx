@@ -1,46 +1,41 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
+import {Button, Input} from "antd";
+import {EditOutlined} from "@ant-design/icons";
+import style from "./ProfileStatus.module.css"
 
 export type ProfileStatusType = {
     status: string
     updateStatus: (status: string) => void
 }
 
-class ProfileStatus extends React.Component<ProfileStatusType> {
-    state = {
-        editMode: false,
-        status: this.props.status
+export const ProfileStatus: React.FC<ProfileStatusType> = (props) => {
+    const [editMode, setEditMode] = useState<boolean>(false)
+    const [status, setStatus] = useState<string>(props.status)
+    useEffect(() => {
+        setStatus(props.status)
+    }, [props.status])
+    const activateEditMode = () => setEditMode(true)
+    const deActivateEditMode = () => {
+        setEditMode(false)
+        props.updateStatus(status)
     }
-    activateEditMode = () => {
-        this.setState({editMode: true})
+    const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setStatus(e.currentTarget.value)
     }
-    deActivateEditMode = () => {
-        this.setState({editMode: false})
-        this.props.updateStatus(this.state.status)
-    }
-    onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
-        this.setState({status: e.currentTarget.value})
-    }
-
-    componentDidUpdate(prevProps: Readonly<ProfileStatusType>, prevState: Readonly<ProfileStatusType>) {
-        if(prevProps.status !== this.props.status)
-        this.setState({status: this.props.status})
-    }
-
-    render() {
-        return (
+    return (
+        <div className={style.statusContainer}>
+            {!editMode &&
             <div>
-                <div>
-                    {!this.state.editMode &&
-                    <span onDoubleClick={this.activateEditMode}>{this.props.status || "Your status:"}</span>}
-                </div>
-                <div>
-                    {this.state.editMode &&
-                    <input onChange={this.onStatusChange} autoFocus onBlur={this.deActivateEditMode}
-                           value={this.state.status}/>}
-                </div>
+                <span className={style.status}><b>Status: </b>{props.status || "Your status:"}</span>
+                <Button size={"large"} onClick={activateEditMode} type={"link"} icon={<EditOutlined/>}/>
             </div>
-        )
-    }
+            }
+            {editMode &&
+            <div>
+                <Input style={{width: "250px"}} size={"middle"} onChange={onStatusChange} autoFocus
+                       onBlur={deActivateEditMode} value={status}/>
+            </div>
+            }
+        </div>
+    )
 }
-
-export default ProfileStatus;

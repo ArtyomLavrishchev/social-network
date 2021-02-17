@@ -1,6 +1,9 @@
 import React from "react";
 import s from "./FormsControls.module.css"
 import {Field} from "redux-form";
+import { Input as Inp } from 'antd';
+
+const { TextArea } = Inp;
 
 const FormControl = (
     {
@@ -23,7 +26,7 @@ const FormControl = (
 
 export const Textarea = (props: any) => {
     const {input, meta, child, element, ...restProps} = props
-    return <FormControl {...props}><textarea {...input} {...restProps}/></FormControl>
+    return <FormControl {...props}><TextArea {...input} {...restProps}/></FormControl>
 }
 
 export const Input = (props: any) => {

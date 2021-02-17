@@ -1,0 +1,14 @@
+.wrapper {
+    position: relative;
+    width: 100%;
+    font-size: 16px;
+}
+.editBtn {
+    position: absolute;
+    left: -30px;
+    top: -10px;
+}
+.fullName {
+    color: #111;
+    font-size: 45px;
+}

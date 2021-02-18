@@ -6,4 +6,12 @@
     font-family: 'Poppins', sans-serif;
     position: relative;
     background: linear-gradient(to right, #001529, #004c98, #001529);
+    z-index: 1;
+}
+.back {
+    z-index: 0;
+}
+.front {
+    z-index: 1;
+    position: relative;
 }

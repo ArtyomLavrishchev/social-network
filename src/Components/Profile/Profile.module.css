@@ -1,3 +1,4 @@
 .item {
     padding: 20px;
+    z-index: 1;
 }

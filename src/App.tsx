@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, withRouter, Switch, Redirect, Link} from "react-router-dom"
+import {Link, Redirect, Route, Switch, withRouter} from "react-router-dom"
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import Preloader from "./Components/Common/Preloader/Preloader";
 import {compose} from "redux";
@@ -11,10 +11,7 @@ import "./App.css";
 import 'antd/dist/antd.css';
 
 import {Layout, Menu} from 'antd';
-import {
-    TeamOutlined,
-    UserOutlined,
-} from '@ant-design/icons';
+import {TeamOutlined, UserOutlined,} from '@ant-design/icons';
 import Background from "./Components/Common/Background/Background";
 
 const {Content, Sider} = Layout;
@@ -63,23 +60,27 @@ class App extends React.Component<AppPropsType> {
                 <Layout className="site-layout">
                     <AppHeader/>
                     <Content className={"content"}>
-                        <Background/>
-                        <React.Suspense fallback={<Preloader/>}>
-                            <Switch>
-                                <Route exact path="/"
-                                       render={() => <Redirect to={"/profile"}/>}/>
-                                <Route exact path="/social-network"
-                                       render={() => <Redirect to={"/profile"}/>}/>
-                                <Route path="/profile/:userId?"
-                                       render={() => <ProfileContainer/>}/>
-                                <Route path="/users"
-                                       render={() => <UsersContainer/>}/>
-                                <Route path="/login" render={() => <Login/>}/>
-                                <Route path="/dialogs"
-                                       render={() => <DialogsContainer/>}/>
-                                <Route path="/!*" render={() => <div>404 NOT FOUND</div>}/>
-                            </Switch>
-                        </React.Suspense>
+                        <div className={"back"}>
+                            <Background/>
+                        </div>
+                        <div className={"front"}>
+                            <React.Suspense fallback={<Preloader/>}>
+                                <Switch>
+                                    <Route exact path="/"
+                                           render={() => <Redirect to={"/profile"}/>}/>
+                                    <Route exact path="/social-network"
+                                           render={() => <Redirect to={"/profile"}/>}/>
+                                    <Route path="/profile/:userId?"
+                                           render={() => <ProfileContainer/>}/>
+                                    <Route path="/users"
+                                           render={() => <UsersContainer/>}/>
+                                    <Route path="/login" render={() => <Login/>}/>
+                                    <Route path="/dialogs"
+                                           render={() => <DialogsContainer/>}/>
+                                    <Route path="/!*" render={() => <div>404 NOT FOUND</div>}/>
+                                </Switch>
+                            </React.Suspense>
+                        </div>
                     </Content>
                 </Layout>
             </Layout>

@@ -4,7 +4,6 @@ import Post from "./Post/Post";
 import {MyPostsContainerType} from "./MyPostsContainer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Textarea} from "../../Common/FormsControls/FormsControls";
-import {Button} from "antd";
 
 type FormDataType = {
     newPostBody: string
@@ -49,7 +48,7 @@ const AddPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                     name={"newPostBody"}
                     placeholder={"What's new?"}
                 />
-                <Button>Add post</Button>
+                <button>Add post</button>
             </div>
         </form>
     )

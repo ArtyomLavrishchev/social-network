@@ -13,13 +13,6 @@ export const ProfileDataForm: React.FC<InjectedFormProps<ProfileFormDataType, Pr
         setEditMode,
         editMode
     }) => {
-    const showModal = () => {
-        setEditMode(true);
-    };
-
-    const handleOk = () => {
-        setEditMode(false);
-    };
 
     const handleCancel = () => {
         setEditMode(false);

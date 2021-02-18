@@ -1,6 +1,7 @@
 .item {
-    color: white;
+    color: #c6c6c6;
     margin-bottom: 20px;
+    z-index: 999;
 }
 
 .item img {
@@ -8,6 +9,7 @@
     border-radius: 200px;
     background-color: grey;
     padding: 3px;
+    margin: 10px;
 }
 
 .like {
@@ -19,7 +21,7 @@
 .delete {
     font-size: 12px;
     font-style: italic;
-    color: rgba(0,0,0,0.54);
+    color: #c6c6c6;
     cursor: pointer;
     width: 20%;
     text-align: right;

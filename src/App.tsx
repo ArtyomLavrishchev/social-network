@@ -15,6 +15,7 @@ import {
     TeamOutlined,
     UserOutlined,
 } from '@ant-design/icons';
+import Background from "./Components/Common/Background/Background";
 
 const {Content, Sider} = Layout;
 const {SubMenu} = Menu;
@@ -61,7 +62,8 @@ class App extends React.Component<AppPropsType> {
                 </Sider>
                 <Layout className="site-layout">
                     <AppHeader/>
-                    <Content className={"content"} style={{backgroundColor: "#c4dfff"}}>
+                    <Content className={"content"}>
+                        <Background/>
                         <React.Suspense fallback={<Preloader/>}>
                             <Switch>
                                 <Route exact path="/"

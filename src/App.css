@@ -1,14 +1,9 @@
-
-#components-layout-demo-side .logo {
-    height: 32px;
-    margin: 16px;
-    background: rgba(255, 255, 255, 0.3);
-}
-
 .site-layout .site-layout-background {
     background: linear-gradient(to right, #001529, #004c98, #001529);
 }
 .content {
-    color: #111;
+    color: #c6c6c6;
     font-family: 'Poppins', sans-serif;
+    position: relative;
+    background: linear-gradient(to right, #001529, #004c98, #001529);
 }

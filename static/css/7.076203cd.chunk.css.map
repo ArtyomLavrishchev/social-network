@@ -1,0 +1,1 @@
+{"version":3,"sources":["Login.module.css"],"names":[],"mappings":"AAAA,oBACI,cAAe,CACf,aAAc,CACd,aAAc,CACd,SACJ","file":"7.076203cd.chunk.css","sourcesContent":[".login {\r\n    font-size: 25px;\r\n    margin: 20px 0;\r\n    display: block;\r\n    z-index: 1;\r\n}"]}
